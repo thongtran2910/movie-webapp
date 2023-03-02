@@ -4,7 +4,7 @@ import { userRoute } from "./routes/userRoute";
 
 function App() {
   return (
-    <div>
+    <>
       <BrowserRouter>
         <Routes>
           {userRoute.map((route, index) => {
@@ -29,7 +29,7 @@ function App() {
           })}
         </Routes>
       </BrowserRouter>
-    </div>
+    </>
   );
 }
 

@@ -1,5 +1,4 @@
 import React from "react";
-import Navigate from "../components/navigate/NavigateComponent";
 
 export default function LayoutTheme({ Component }) {
   return (

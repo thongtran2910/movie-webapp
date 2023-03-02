@@ -1,8 +1,7 @@
 .nav__container {
   display: flex;
   justify-content: space-between;
-  // margin: 10px;
-  // padding: 0 30px;
+  padding-bottom: 20px;
   font-size: 14px;
 
   .nav__menu {
@@ -17,9 +16,5 @@
     display: flex;
     width: 50%;
     justify-content: flex-end;
-
-    // .nav__usertab {
-    //   margin-right: 20px;
-    // }
   }
 }
