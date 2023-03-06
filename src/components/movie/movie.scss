@@ -1,0 +1,17 @@
+.movie__carousel {
+  position: relative;
+  margin-bottom: 20px;
+}
+.movie__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  h2 {
+    margin-top: 20px;
+  }
+
+  .swiper-wrapper {
+    padding: 20px 0;
+  }
+}

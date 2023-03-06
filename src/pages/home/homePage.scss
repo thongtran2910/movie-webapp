@@ -12,9 +12,11 @@
     width: 80%;
     padding: 30px;
 
-    .carousel__container {
+    .body__container {
       position: relative;
       margin-top: 20px;
+      // display: flex;
+      // flex-direction: column;
     }
   }
 }
