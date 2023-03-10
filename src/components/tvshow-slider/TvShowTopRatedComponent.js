@@ -6,14 +6,15 @@ import { ReactComponent as NextBtn } from "../../assets/next-btn.svg";
 
 import "swiper/scss";
 import { useSelector } from "react-redux";
-import { selectMoviePopular } from "../../redux/selectors/movieSelector";
+import { selectTvShowTopRated } from "../../redux/selectors/tvShowSelector";
 
-const MoviePopular = () => {
-  const popularList = useSelector(selectMoviePopular);
-
+const TvShowTopRated = () => {
   const getPosterUrl = (path) => {
     return `https://www.themoviedb.org/t/p/w440_and_h660_face${path}`;
   };
+
+  const topRatedList = useSelector(selectTvShowTopRated);
+
   return (
     <Swiper
       slidesPerView={5}
@@ -25,17 +26,16 @@ const MoviePopular = () => {
       }}
       modules={[Navigation]}
     >
-      {popularList.map((movie, index) => {
+      {topRatedList.map((movie, index) => {
         return (
           <SwiperSlide key={index}>
             <div className="movie__card">
               <img
-                alt={movie.original_title}
+                alt={movie.original_name}
                 src={getPosterUrl(movie.poster_path)}
-                loading="lazy"
               />
-              <div className="swiper-lazy-preloader"></div>
-              <h3>{movie.title}</h3>
+
+              <h3>{movie.name}</h3>
             </div>
           </SwiperSlide>
         );
@@ -47,4 +47,4 @@ const MoviePopular = () => {
   );
 };
 
-export default MoviePopular;
+export default TvShowTopRated;

@@ -1,8 +1,8 @@
-.movie__carousel {
+.tvshow__carousel {
   position: relative;
   margin-bottom: 20px;
 }
-.movie__container {
+.tvshow__container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -52,6 +52,7 @@
       border-radius: 10px;
       text-align: center;
       font-size: 0.8rem;
+      line-height: 2rem;
       transition: all 0.3s;
       z-index: 15;
       &:hover {
@@ -61,9 +62,6 @@
       img {
         width: 100%;
         border-radius: 10px 10px 0 0;
-      }
-      h3 {
-        padding-top: 10px;
       }
     }
 
