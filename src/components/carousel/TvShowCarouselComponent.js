@@ -1,20 +1,30 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Thumbs, Navigation } from "swiper";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReactComponent as StarIcon } from "../../assets/star.svg";
 import { ReactComponent as PrevBtn } from "../../assets/prev-btn.svg";
 import { ReactComponent as NextBtn } from "../../assets/next-btn.svg";
 import "swiper/scss";
 import "./carousel.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectTvShowTrending } from "../../redux/selectors/tvShowSelector";
+import tmdbApi, { category } from "../../api/tmdbApi";
+import { setTvShowTrendingAction } from "../../redux/actions/tvShowAction";
+import apiConfig from "../../api/apiConfig";
 
 const TvShowCarousel = () => {
   const [activeThumb, setActiveThumb] = useState();
 
-  const getBannerUrl = (path) => {
-    return `https://image.tmdb.org/t/p/w1280${path}`;
-  };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    let fetchTrendingTv = async () => {
+      const params = {};
+      let res = await tmdbApi.getTrendingList(category.tv, { params });
+      dispatch(setTvShowTrendingAction(res.results));
+    };
+    fetchTrendingTv();
+  }, [dispatch]);
 
   const bannerList = useSelector(selectTvShowTrending);
 
@@ -43,10 +53,11 @@ const TvShowCarousel = () => {
             <SwiperSlide key={index}>
               <img
                 loading="lazy"
-                src={getBannerUrl(movie.backdrop_path)}
+                src={apiConfig.originalImage(movie.backdrop_path)}
                 alt={movie.original_name}
               />
               <div className="swiper-lazy-preloader"></div>
+              <div className="img__backdrop"></div>
               <div className="banner__content">
                 <h3 className="movie__title">{movie.name}</h3>
                 <p className="movie__release">
@@ -81,7 +92,7 @@ const TvShowCarousel = () => {
           return (
             <SwiperSlide key={index}>
               <img
-                src={getBannerUrl(movie.backdrop_path)}
+                src={apiConfig.originalImage(movie.backdrop_path)}
                 alt={movie.original_title}
                 loading="lazy"
               />

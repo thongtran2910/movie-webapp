@@ -1,63 +1,42 @@
-import { tvShowService } from "../../services/tvShowService";
 import {
   SET_TVSHOW_AIRING,
+  SET_TVSHOW_EXPLORE,
   SET_TVSHOW_POPULAR,
   SET_TVSHOW_TOPRATED,
   SET_TVSHOW_TRENDING,
 } from "../constants/tvShowConstant";
 
-export const setTvShowTrendingActionService = () => {
-  return (dispatch) => {
-    tvShowService
-      .getTrendingTvShow()
-      .then((res) => {
-        dispatch({
-          type: SET_TVSHOW_TRENDING,
-          payload: res.data.results,
-        });
-      })
-      .catch((err) => console.log(err));
+export const setTvShowTrendingAction = (trendingTv) => {
+  return {
+    type: SET_TVSHOW_TRENDING,
+    payload: trendingTv,
   };
 };
 
-export const setTvShowPopularActionService = () => {
-  return (dispatch) => {
-    tvShowService
-      .getPopularTvShow()
-      .then((res) => {
-        dispatch({
-          type: SET_TVSHOW_POPULAR,
-          payload: res.data.results,
-        });
-      })
-      .catch((err) => console.log(err));
+export const setTvShowPopularAction = (popularTv) => {
+  return {
+    type: SET_TVSHOW_POPULAR,
+    payload: popularTv,
   };
 };
 
-export const setTvShowTopRatedActionService = () => {
-  return (dispatch) => {
-    tvShowService
-      .getTopRatedTvShow()
-      .then((res) => {
-        dispatch({
-          type: SET_TVSHOW_TOPRATED,
-          payload: res.data.results,
-        });
-      })
-      .catch((err) => console.log(err));
+export const setTvShowTopRatedAction = (topRatedTv) => {
+  return {
+    type: SET_TVSHOW_TOPRATED,
+    payload: topRatedTv,
   };
 };
 
-export const setTvShowAiringActionService = () => {
-  return (dispatch) => {
-    tvShowService
-      .getAiringTvShow()
-      .then((res) => {
-        dispatch({
-          type: SET_TVSHOW_AIRING,
-          payload: res.data.results,
-        });
-      })
-      .catch((err) => console.log(err));
+export const setTvShowAiringAction = (airingTv) => {
+  return {
+    type: SET_TVSHOW_AIRING,
+    payload: airingTv,
+  };
+};
+
+export const setTvShowExploreAction = (tvShow) => {
+  return {
+    type: SET_TVSHOW_EXPLORE,
+    payload: tvShow,
   };
 };

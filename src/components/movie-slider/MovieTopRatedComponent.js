@@ -1,19 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import { ReactComponent as PrevBtn } from "../../assets/prev-btn.svg";
 import { ReactComponent as NextBtn } from "../../assets/next-btn.svg";
 
 import "swiper/scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectMovieTopRated } from "../../redux/selectors/movieSelector";
+import tmdbApi, { movieType } from "../../api/tmdbApi";
+import { setMovieTopRatedAction } from "../../redux/actions/movieAction";
+import Card from "../card/CardComponent";
 
 const MovieTopRated = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchTopRatedMovie = async () => {
+      const params = {};
+      const res = await tmdbApi.getMoviesList(movieType.top_rated, { params });
+      dispatch(setMovieTopRatedAction(res.results));
+    };
+    fetchTopRatedMovie();
+  }, [dispatch]);
+
   const topRatedList = useSelector(selectMovieTopRated);
 
-  const getPosterUrl = (path) => {
-    return `https://www.themoviedb.org/t/p/w440_and_h660_face${path}`;
-  };
   return (
     <Swiper
       slidesPerView={5}
@@ -28,14 +39,7 @@ const MovieTopRated = () => {
       {topRatedList.map((movie, index) => {
         return (
           <SwiperSlide key={index}>
-            <div className="movie__card">
-              <img
-                alt={movie.original_title}
-                src={getPosterUrl(movie.poster_path)}
-              />
-
-              <h3>{movie.title}</h3>
-            </div>
+            <Card item={movie} />
           </SwiperSlide>
         );
       })}

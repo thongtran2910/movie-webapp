@@ -1,4 +1,3 @@
-import { movieService } from "../../services/movieService";
 import {
   SET_MOVIE_POPULAR,
   SET_MOVIE_TOPRATED,
@@ -6,58 +5,37 @@ import {
   SET_MOVIE_UPCOMING,
 } from "../constants/movieConstant";
 
-export const setMovieTrendingActionService = () => {
-  return (dispatch) => {
-    movieService
-      .getTrendingMovie()
-      .then((res) => {
-        dispatch({
-          type: SET_MOVIE_TRENDING,
-          payload: res.data.results,
-        });
-      })
-      .catch((err) => console.log(err));
+export const setMovieTrendingAction = (trendingMovie) => {
+  return {
+    type: SET_MOVIE_TRENDING,
+    payload: trendingMovie,
   };
 };
 
-export const setMoviePopularActionService = () => {
-  return (dispatch) => {
-    movieService
-      .getPopularMovie()
-      .then((res) => {
-        dispatch({
-          type: SET_MOVIE_POPULAR,
-          payload: res.data.results,
-        });
-      })
-      .catch((err) => console.log(err));
+export const setMoviePopularAction = (popularMovie) => {
+  return {
+    type: SET_MOVIE_POPULAR,
+    payload: popularMovie,
   };
 };
 
-export const setMovieTopRatedActionService = () => {
-  return (dispatch) => {
-    movieService
-      .getTopRatedMovie()
-      .then((res) => {
-        dispatch({
-          type: SET_MOVIE_TOPRATED,
-          payload: res.data.results,
-        });
-      })
-      .catch((err) => console.log(err));
+export const setMovieTopRatedAction = (topRatedMovie) => {
+  return {
+    type: SET_MOVIE_TOPRATED,
+    payload: topRatedMovie,
   };
 };
 
-export const setMovieUpcomingActionService = () => {
-  return (dispatch) => {
-    movieService
-      .getUpcomingMovie()
-      .then((res) => {
-        dispatch({
-          type: SET_MOVIE_UPCOMING,
-          payload: res.data.results,
-        });
-      })
-      .catch((err) => console.log(err));
+export const setMovieUpcomingAction = (upcomingMovie) => {
+  return {
+    type: SET_MOVIE_UPCOMING,
+    payload: upcomingMovie,
   };
 };
+
+// export const setMovieExploreAction = (movies) => {
+//   return {
+//     type: SET_MOVIE_EXPLORE,
+//     payload: movies,
+//   };
+// };

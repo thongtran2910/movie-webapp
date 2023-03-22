@@ -1,19 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import { ReactComponent as PrevBtn } from "../../assets/prev-btn.svg";
 import { ReactComponent as NextBtn } from "../../assets/next-btn.svg";
 
 import "swiper/scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectMoviePopular } from "../../redux/selectors/movieSelector";
+import tmdbApi, { movieType } from "../../api/tmdbApi";
+import { setMoviePopularAction } from "../../redux/actions/movieAction";
+import Card from "../card/CardComponent";
 
 const MoviePopular = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    let fetchPopularMovie = async () => {
+      const params = {};
+      let res = await tmdbApi.getMoviesList(movieType.popular, { params });
+      dispatch(setMoviePopularAction(res.results));
+    };
+    fetchPopularMovie();
+  }, [dispatch]);
+
   const popularList = useSelector(selectMoviePopular);
 
-  const getPosterUrl = (path) => {
-    return `https://www.themoviedb.org/t/p/w440_and_h660_face${path}`;
-  };
   return (
     <Swiper
       slidesPerView={5}
@@ -28,15 +39,7 @@ const MoviePopular = () => {
       {popularList.map((movie, index) => {
         return (
           <SwiperSlide key={index}>
-            <div className="movie__card">
-              <img
-                alt={movie.original_title}
-                src={getPosterUrl(movie.poster_path)}
-                loading="lazy"
-              />
-              <div className="swiper-lazy-preloader"></div>
-              <h3>{movie.title}</h3>
-            </div>
+            <Card item={movie} />
           </SwiperSlide>
         );
       })}

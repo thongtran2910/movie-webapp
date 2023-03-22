@@ -10,6 +10,7 @@ let initialState = {
   moviePopularList: [],
   movieTopRatedList: [],
   movieUpcomingList: [],
+  movieExploreList: [],
 };
 
 export const movieReducer = (state = initialState, action) => {

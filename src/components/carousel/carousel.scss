@@ -1,9 +1,16 @@
+@use "../../scss" as *;
+
 .movie__banner {
   height: 100%;
   border-radius: 10px;
 
   .swiper-slide {
-    &::after {
+    img {
+      height: 100%;
+      max-width: 100%;
+      border-radius: 10px;
+    }
+    .img__backdrop {
       position: absolute;
       top: 0;
       left: 0;
@@ -19,59 +26,50 @@
       );
       z-index: 5;
     }
-  }
 
-  img {
-    height: 100%;
-    max-width: 100%;
-    border-radius: 10px;
-  }
+    .banner__content {
+      position: absolute;
+      top: 50%;
+      left: 50px;
+      transform: translateY(-50%);
+      width: 40%;
+      z-index: 10;
 
-  .banner__content {
-    position: absolute;
-    top: 50%;
-    left: 50px;
-    transform: translateY(-50%);
-    width: 40%;
-    z-index: 10;
+      h3 {
+        font-size: 3.5rem;
+        line-height: 1;
+      }
 
-    h3 {
-      font-size: 3.5rem;
-      line-height: 1;
-      color: #e5e5e5;
-    }
+      p {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: $subtext-color;
+        line-height: 1.5rem;
+      }
+      .movie__release {
+        margin: 1.5rem 0;
+      }
 
-    p {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: #9ba4b4;
-      line-height: 1.5rem;
-    }
-    .movie__release {
-      margin: 1.5rem 0;
-    }
+      .movie__overview {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+      }
 
-    .movie__overview {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-    }
+      .movie__rating {
+        @include flex(center, unset, unset);
+        background-color: #dbaf1c;
+        font-size: 1.2rem;
+        width: 6rem;
+        padding: 0.5rem 1.3rem;
+        border-radius: 50px;
+        margin-top: 1.5rem;
 
-    .movie__rating {
-      color: white;
-      background-color: #dbaf1c;
-      font-size: 1.2rem;
-      display: flex;
-      width: 6rem;
-      padding: 0.5rem 1.3rem;
-      align-items: center;
-      border-radius: 50px;
-      margin-top: 1.5rem;
-
-      span {
-        margin-right: 8px;
+        span {
+          margin-right: 8px;
+        }
       }
     }
   }
@@ -81,7 +79,6 @@
     bottom: 120px;
     z-index: 99;
     cursor: pointer;
-    color: white;
     width: 30px;
 
     svg {
@@ -115,8 +112,7 @@
     transition: all 0.3s;
 
     &-thumb-active {
-      border: 3px solid #ad241b;
-      // box-shadow: 0px 0px 8px 5px rgba(173, 36, 27, 0.7);
+      border: 3px solid $main-color;
       transform: scale(1.1);
     }
   }

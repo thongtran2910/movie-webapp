@@ -1,7 +1,3 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setMovieTrendingActionService } from "../../redux/actions/movieAction";
-import { movieService } from "../../services/movieService";
 import MovieCarousel from "../carousel/MovieCarouselComponent";
 import MoviePopular from "../movie-slider/MoviePopularComponent";
 import MovieTopRated from "../movie-slider/MovieTopRatedComponent";

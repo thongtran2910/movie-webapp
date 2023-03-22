@@ -1,14 +1,22 @@
 import React from "react";
+import Sidebar from "../components/sidebar/SidebarComponent";
 
 export default function LayoutTheme({ Component }) {
   return (
     <div
-      style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
+      style={{ margin: "0 auto", display: "flex", backgroundColor: "#0f0f0f" }}
     >
-      {/* <Navigate /> */}
-      <div>
-        <Component />
+      <div
+        style={{
+          width: "20%",
+          borderRight: "1px solid #202020",
+        }}
+      >
+        <Sidebar />
       </div>
+      <>
+        <Component />
+      </>
     </div>
   );
 }

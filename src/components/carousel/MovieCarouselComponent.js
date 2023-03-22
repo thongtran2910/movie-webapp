@@ -1,21 +1,32 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Thumbs, Navigation } from "swiper";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReactComponent as StarIcon } from "../../assets/star.svg";
 import { ReactComponent as PrevBtn } from "../../assets/prev-btn.svg";
 import { ReactComponent as NextBtn } from "../../assets/next-btn.svg";
 import "swiper/scss";
 import "./carousel.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectMovieTrending } from "../../redux/selectors/movieSelector";
+import { setMovieTrendingAction } from "../../redux/actions/movieAction";
+import tmdbApi, { category } from "../../api/tmdbApi";
+import apiConfig from "../../api/apiConfig";
 
 const MovieCarousel = () => {
   const [activeThumb, setActiveThumb] = useState();
-  const bannerList = useSelector(selectMovieTrending);
 
-  const getBannerUrl = (path) => {
-    return `https://image.tmdb.org/t/p/w1280${path}`;
-  };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    let fetchTrendingMovie = async () => {
+      const params = {};
+      let res = await tmdbApi.getTrendingList(category.movie, { params });
+      dispatch(setMovieTrendingAction(res.results));
+    };
+    fetchTrendingMovie();
+  }, [dispatch]);
+
+  const bannerList = useSelector(selectMovieTrending);
 
   return (
     <>
@@ -23,6 +34,7 @@ const MovieCarousel = () => {
         slidesPerView={1}
         spaceBetween={10}
         loop={true}
+        grabCursor={true}
         navigation={{
           nextEl: ".swiper__button-next",
           prevEl: ".swiper__button-prev",
@@ -42,10 +54,11 @@ const MovieCarousel = () => {
             <SwiperSlide key={index}>
               <img
                 loading="lazy"
-                src={getBannerUrl(movie.backdrop_path)}
+                src={apiConfig.originalImage(movie.backdrop_path)}
                 alt={movie.original_title}
               />
               <div className="swiper-lazy-preloader"></div>
+              <div className="img__backdrop"></div>
               <div className="banner__content">
                 <h3 className="movie__title">{movie.title}</h3>
                 <p className="movie__release">
@@ -80,7 +93,7 @@ const MovieCarousel = () => {
           return (
             <SwiperSlide key={index}>
               <img
-                src={getBannerUrl(movie.backdrop_path)}
+                src={apiConfig.originalImage(movie.backdrop_path)}
                 alt={movie.original_title}
                 loading="lazy"
               />

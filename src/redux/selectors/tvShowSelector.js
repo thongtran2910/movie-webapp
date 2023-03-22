@@ -18,3 +18,7 @@ export const selectTvShowAiring = createSelector(
   [selectTvShowReducer],
   (tvShow) => tvShow.tvShowAiringList
 );
+export const selectTvShowExplore = createSelector(
+  [selectTvShowReducer],
+  (tvShow) => tvShow.tvShowExploreList
+);

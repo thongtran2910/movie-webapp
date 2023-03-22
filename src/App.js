@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 import { userRoute } from "./routes/userRoute";
+import "./App.scss";
 
 function App() {
   return (

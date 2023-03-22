@@ -1,0 +1,36 @@
+@use "../../scss" as *;
+
+.navbar__content {
+  @include flex(unset, unset, unset);
+  color: $subtext-color;
+
+  .navbar__item {
+    margin-right: 20px;
+    cursor: pointer;
+    position: relative;
+    font-size: 16px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      height: 3px;
+      width: 0;
+      background-color: $main-color;
+      transition: width 0.5s ease;
+      transform: translateX(-50%);
+    }
+
+    &:hover {
+      color: $text-color;
+    }
+    &-active {
+      color: $text-color;
+      font-weight: bold;
+    }
+    &-active::after {
+      width: 100%;
+    }
+  }
+}

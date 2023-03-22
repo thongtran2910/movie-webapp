@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import { ReactComponent as PrevBtn } from "../../assets/prev-btn.svg";
 import { ReactComponent as NextBtn } from "../../assets/next-btn.svg";
 
 import "swiper/scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectTvShowPopular } from "../../redux/selectors/tvShowSelector";
+import tmdbApi, { tvType } from "../../api/tmdbApi";
+import { setTvShowPopularAction } from "../../redux/actions/tvShowAction";
+import Card from "../card/CardComponent";
 
 const TvShowPopular = () => {
-  const getPosterUrl = (path) => {
-    return `https://www.themoviedb.org/t/p/w440_and_h660_face${path}`;
-  };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchTvPopular = async () => {
+      const params = {};
+      const res = await tmdbApi.getTvList(tvType.popular, { params });
+      dispatch(setTvShowPopularAction(res.results));
+    };
+    fetchTvPopular();
+  }, [dispatch]);
 
   const popularList = useSelector(selectTvShowPopular);
 
@@ -29,15 +39,7 @@ const TvShowPopular = () => {
       {popularList.map((movie, index) => {
         return (
           <SwiperSlide key={index}>
-            <div className="movie__card">
-              <img
-                alt={movie.original_name}
-                src={getPosterUrl(movie.poster_path)}
-                loading="lazy"
-              />
-              <div className="swiper-lazy-preloader"></div>
-              <h3>{movie.name}</h3>
-            </div>
+            <Card item={movie} />
           </SwiperSlide>
         );
       })}

@@ -1,19 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import { ReactComponent as PrevBtn } from "../../assets/prev-btn.svg";
 import { ReactComponent as NextBtn } from "../../assets/next-btn.svg";
 
 import "swiper/scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectMovieUpcoming } from "../../redux/selectors/movieSelector";
+import tmdbApi, { movieType } from "../../api/tmdbApi";
+import { setMovieUpcomingAction } from "../../redux/actions/movieAction";
+import Card from "../card/CardComponent";
 
 const MovieUpcoming = () => {
-  const upcomingList = useSelector(selectMovieUpcoming);
+  const dispatch = useDispatch();
 
-  const getPosterUrl = (path) => {
-    return `https://www.themoviedb.org/t/p/w440_and_h660_face${path}`;
-  };
+  useEffect(() => {
+    const fetchUpcomingMovie = async () => {
+      const params = {};
+      const res = await tmdbApi.getMoviesList(movieType.upcoming, { params });
+      dispatch(setMovieUpcomingAction(res.results));
+    };
+    fetchUpcomingMovie();
+  }, [dispatch]);
+
+  const upcomingList = useSelector(selectMovieUpcoming);
   return (
     <Swiper
       slidesPerView={5}
@@ -28,13 +38,7 @@ const MovieUpcoming = () => {
       {upcomingList.map((movie, index) => {
         return (
           <SwiperSlide key={index}>
-            <div className="movie__card">
-              <img
-                alt={movie.original_title}
-                src={getPosterUrl(movie.poster_path)}
-              />
-              <h3>{movie.title}</h3>
-            </div>
+            <Card item={movie} />
           </SwiperSlide>
         );
       })}
