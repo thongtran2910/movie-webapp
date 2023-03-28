@@ -1,5 +1,7 @@
 import {
+  SET_MOVIE_AIRING,
   SET_MOVIE_POPULAR,
+  SET_MOVIE_SIMILAR,
   SET_MOVIE_TOPRATED,
   SET_MOVIE_TRENDING,
   SET_MOVIE_UPCOMING,
@@ -33,9 +35,16 @@ export const setMovieUpcomingAction = (upcomingMovie) => {
   };
 };
 
-// export const setMovieExploreAction = (movies) => {
-//   return {
-//     type: SET_MOVIE_EXPLORE,
-//     payload: movies,
-//   };
-// };
+export const setMovieAiringAction = (airingMovie) => {
+  return {
+    type: SET_MOVIE_AIRING,
+    payload: airingMovie,
+  };
+};
+
+export const setMovieSimilarAction = (similarMovie) => {
+  return {
+    type: SET_MOVIE_SIMILAR,
+    payload: similarMovie,
+  };
+};

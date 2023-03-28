@@ -18,7 +18,11 @@ export const selectMovieUpcoming = createSelector(
   [selectMovieReducer],
   (movie) => movie.movieUpcomingList
 );
-// export const selectMovieExplore = createSelector(
-//   [selectMovieReducer],
-//   (movie) => movie.movieExploreList
-// );
+export const selectMovieAiring = createSelector(
+  [selectMovieReducer],
+  (movie) => movie.movieAiringList
+);
+export const selectMovieSimilar = createSelector(
+  [selectMovieReducer],
+  (movie) => movie.movieSimilarList
+);

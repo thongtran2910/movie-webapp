@@ -9,14 +9,13 @@ export default function LayoutTheme({ Component }) {
       <div
         style={{
           width: "20%",
-          borderRight: "1px solid #202020",
         }}
       >
         <Sidebar />
       </div>
-      <>
+      <div style={{ width: "80%" }}>
         <Component />
-      </>
+      </div>
     </div>
   );
 }

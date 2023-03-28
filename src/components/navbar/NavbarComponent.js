@@ -12,20 +12,17 @@ const Navbar = ({ setIsMovie }) => {
     setIsActive(false);
     setIsMovie(false);
   };
+
   return (
     <div className="navbar__content">
       <p
-        className={`navbar__item navbar__movie ${
-          isActive ? "navbar__item-active" : ""
-        }`}
+        className={`navbar__item ${isActive ? "navbar__item-active" : ""}`}
         onClick={handleMovieBtn}
       >
         Movies
       </p>
       <p
-        className={`navbar__item navbar__tvshow ${
-          isActive ? "" : "navbar__item-active"
-        }`}
+        className={`navbar__item ${isActive ? "" : "navbar__item-active"}`}
         onClick={handleTvShowBtn}
       >
         Tv Shows

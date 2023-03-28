@@ -1,14 +1,25 @@
-import "./searchbox.scss";
+import { ReactComponent as SearchIcon } from "../../assets/search-icon.svg";
+import Input from "../input/InputComponent";
 
-const SearchBox = (props) => {
+const Searchbox = (props) => {
+  const enterEvent = (e) => {
+    if (e.key === "Enter") {
+      props.onClick();
+    }
+  };
+
   return (
-    <input
-      type={props.type}
-      value={props.value}
-      placeholder={props.placeholder}
-      onChange={props.onChange ? (e) => props.onChange(e) : null}
-    />
+    <>
+      <SearchIcon onClick={props.onClick ? () => props.onClick() : null} />
+      <Input
+        type="text"
+        placeholder="Search"
+        value={props.input}
+        onChange={props.handleChange}
+        onKeyDown={enterEvent}
+      />
+    </>
   );
 };
 
-export default SearchBox;
+export default Searchbox;

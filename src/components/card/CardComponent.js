@@ -2,8 +2,8 @@ import apiConfig from "../../api/apiConfig";
 import { Link } from "react-router-dom";
 import "./card.scss";
 
-const Card = ({ item }) => {
-  const link = "/detail/" + item.id;
+const Card = ({ category, item }) => {
+  const link = "/" + category + "/" + item.id;
   return (
     <Link to={link}>
       <div className="movie__card">

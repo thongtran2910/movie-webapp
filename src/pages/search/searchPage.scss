@@ -1,0 +1,45 @@
+@use "../../scss" as *;
+
+.search__container {
+  padding: 0 30px;
+  position: relative;
+  h2 {
+    text-align: center;
+    margin-top: 50px;
+  }
+  .searchbox {
+    @include flex(center, unset, unset);
+    border: 1px solid $border-color;
+    background-color: $card-color;
+    padding: 10px 30px;
+    border-radius: 3rem;
+    width: 60%;
+    height: 60px;
+    margin: 20px auto;
+    svg {
+      color: $subtext-color;
+      width: 10%;
+      height: 25px;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+    input {
+      width: 90%;
+      background-color: $card-color;
+      font-size: 20px;
+    }
+  }
+  .total__results {
+    margin: 20px 0;
+  }
+  .movie__notfound {
+    position: absolute;
+    font-size: 30px;
+    top: 180%;
+    right: 50%;
+    transform: translateX(50%);
+    h3 {
+      text-align: center;
+    }
+  }
+}

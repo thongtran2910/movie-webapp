@@ -3,6 +3,8 @@ import {
   SET_MOVIE_TOPRATED,
   SET_MOVIE_TRENDING,
   SET_MOVIE_UPCOMING,
+  SET_MOVIE_AIRING,
+  SET_MOVIE_SIMILAR,
 } from "../constants/movieConstant";
 
 let initialState = {
@@ -11,6 +13,8 @@ let initialState = {
   movieTopRatedList: [],
   movieUpcomingList: [],
   movieExploreList: [],
+  movieAiringList: [],
+  movieSimilarList: [],
 };
 
 export const movieReducer = (state = initialState, action) => {
@@ -29,6 +33,14 @@ export const movieReducer = (state = initialState, action) => {
     }
     case SET_MOVIE_UPCOMING: {
       state.movieUpcomingList = action.payload;
+      return { ...state };
+    }
+    case SET_MOVIE_AIRING: {
+      state.movieAiringList = action.payload;
+      return { ...state };
+    }
+    case SET_MOVIE_SIMILAR: {
+      state.movieSimilarList = action.payload;
       return { ...state };
     }
     default:

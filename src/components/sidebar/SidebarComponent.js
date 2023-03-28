@@ -20,7 +20,7 @@ const Sidebar = () => {
             <ExploreIcon />
             <p>Explore</p>
           </a>
-          <a href="">
+          <a href="/search">
             <SearchIcon />
             <p>Search</p>
           </a>

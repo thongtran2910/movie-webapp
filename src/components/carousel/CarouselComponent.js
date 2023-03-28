@@ -9,10 +9,10 @@ import "./carousel.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { selectMovieTrending } from "../../redux/selectors/movieSelector";
 import { setMovieTrendingAction } from "../../redux/actions/movieAction";
-import tmdbApi, { category } from "../../api/tmdbApi";
+import tmdbApi from "../../api/tmdbApi";
 import apiConfig from "../../api/apiConfig";
 
-const MovieCarousel = () => {
+const Carousel = ({ category }) => {
   const [activeThumb, setActiveThumb] = useState();
 
   const dispatch = useDispatch();
@@ -20,11 +20,11 @@ const MovieCarousel = () => {
   useEffect(() => {
     let fetchTrendingMovie = async () => {
       const params = {};
-      let res = await tmdbApi.getTrendingList(category.movie, { params });
+      let res = await tmdbApi.getTrendingList(category, { params });
       dispatch(setMovieTrendingAction(res.results));
     };
     fetchTrendingMovie();
-  }, [dispatch]);
+  }, [category, dispatch]);
 
   const bannerList = useSelector(selectMovieTrending);
 
@@ -55,14 +55,14 @@ const MovieCarousel = () => {
               <img
                 loading="lazy"
                 src={apiConfig.originalImage(movie.backdrop_path)}
-                alt={movie.original_title}
+                alt={movie.original_title || movie.original_name}
               />
               <div className="swiper-lazy-preloader"></div>
               <div className="img__backdrop"></div>
               <div className="banner__content">
-                <h3 className="movie__title">{movie.title}</h3>
+                <h3 className="movie__title">{movie.title || movie.name}</h3>
                 <p className="movie__release">
-                  Release date: {movie.release_date}
+                  Release date: {movie.release_date || movie.first_air_date}
                 </p>
                 <p className="movie__overview">{movie.overview}</p>
                 <div className="movie__rating">
@@ -94,7 +94,7 @@ const MovieCarousel = () => {
             <SwiperSlide key={index}>
               <img
                 src={apiConfig.originalImage(movie.backdrop_path)}
-                alt={movie.original_title}
+                alt={movie.original_title || movie.original_name}
                 loading="lazy"
               />
               <div className="swiper-lazy-preloader"></div>
@@ -106,4 +106,4 @@ const MovieCarousel = () => {
   );
 };
 
-export default MovieCarousel;
+export default Carousel;

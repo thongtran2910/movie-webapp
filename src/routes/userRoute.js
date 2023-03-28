@@ -2,6 +2,7 @@ import LayoutTheme from "../HOC/LayoutTheme";
 import DetailPage from "../pages/detail/DetailPage";
 import ExplorePage from "../pages/explore/ExplorePage";
 import HomePage from "../pages/home/HomePage";
+import SearchPage from "../pages/search/SearchPage";
 
 export const userRoute = [
   {
@@ -16,8 +17,13 @@ export const userRoute = [
     isUseLayout: true,
   },
   {
-    path: "/detail/:id",
+    path: `/:category/:id`,
     component: <LayoutTheme Component={DetailPage} />,
     isUseLayout: true,
+  },
+  {
+    path: "/search",
+    component: <LayoutTheme Component={SearchPage} />,
+    isUseLayout: false,
   },
 ];

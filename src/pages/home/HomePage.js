@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { category } from "../../api/tmdbApi";
 import Movie from "../../components/movie/MovieComponent";
 import Navbar from "../../components/navbar/NavbarComponent";
-import TvShow from "../../components/tvshow/TvShowComponent";
+import TvShow from "../../components/movie/TvShowComponent";
 import "./homePage.scss";
 
 const HomePage = () => {
@@ -14,7 +15,13 @@ const HomePage = () => {
           <p className="navbar__usertab">menu</p>
         </div>
       </div>
-      <div className="home__body">{isMovie ? <Movie /> : <TvShow />}</div>
+      <div className="home__body">
+        {isMovie ? (
+          <Movie category={category.movie} />
+        ) : (
+          <TvShow category={category.tv} />
+        )}
+      </div>
     </div>
   );
 };

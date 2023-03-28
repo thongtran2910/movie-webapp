@@ -1,27 +1,28 @@
-import MovieCarousel from "../carousel/MovieCarouselComponent";
-import MoviePopular from "../movie-slider/MoviePopularComponent";
-import MovieTopRated from "../movie-slider/MovieTopRatedComponent";
-import MovieUpcoming from "../movie-slider/MovieUpcomingComponent";
+import { type } from "../../api/tmdbApi";
+import Carousel from "../carousel/CarouselComponent";
+import MoviePopular from "../movie-list/PopularMovieComponent";
+import TopRatedMovie from "../movie-list/TopRatedMovieComponent";
+import UpcomingMovie from "../movie-list/UpcomingMovieComponent";
 import "./movie.scss";
 
-const Movie = () => {
+const Movie = ({ category }) => {
   return (
     <>
       <div className="movie__carousel">
-        <MovieCarousel />
+        <Carousel category={category} />
       </div>
       <div className="movie__container">
         <div className="movie__popular">
           <h2>Popular</h2>
-          <MoviePopular />
+          <MoviePopular category={category} type={type.popular} />
         </div>
         <div className="movie__toprated">
           <h2>Top rated</h2>
-          <MovieTopRated />
+          <TopRatedMovie category={category} type={type.top_rated} />
         </div>
         <div className="movie__upcoming">
           <h2>Upcoming</h2>
-          <MovieUpcoming />
+          <UpcomingMovie category={category} type={type.upcoming} />
         </div>
       </div>
     </>

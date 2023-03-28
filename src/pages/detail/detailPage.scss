@@ -1,0 +1,115 @@
+@use "../../scss" as *;
+
+.banner {
+  height: 50vh;
+  position: relative;
+  background-position: center top 35%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: #000000, $alpha: 0.6);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-image: linear-gradient(to top, $bg-color, rgba(0, 0, 0, 0));
+  }
+}
+
+.detail__content {
+  @include flex(flex-start, flex-start, unset);
+  max-width: 1260px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -200px;
+  position: relative;
+  padding: 0 2rem;
+  &-poster {
+    flex: 1;
+    @include mobile {
+      display: none;
+    }
+    &-img {
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 20px;
+      padding-top: 165%;
+    }
+  }
+
+  &-info {
+    width: 70%;
+    padding-left: 2rem;
+    position: relative;
+
+    @include mobile {
+      width: 100%;
+      padding-left: 0;
+    }
+
+    & > * {
+      margin-bottom: 2rem;
+    }
+
+    .title {
+      font-size: 4rem;
+      line-height: 1;
+    }
+
+    .genres {
+      & > * ~ * {
+        margin-left: 0.5rem;
+      }
+
+      &__item {
+        padding: 0.5rem 1.5rem;
+        border: 2px solid #fff;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        background-color: $bg-color;
+      }
+    }
+
+    .casts {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 10px;
+
+      &__item {
+        &-img {
+          padding-top: 160px;
+          background-size: cover;
+          background-position: center;
+          margin-bottom: 0.5rem;
+        }
+
+        &-name {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
+
+.detail__body {
+  width: 100%;
+  &-similar {
+    margin: 50px 3rem;
+    &-header {
+      margin-top: 100px;
+    }
+  }
+}

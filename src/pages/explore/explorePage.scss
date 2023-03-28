@@ -1,7 +1,7 @@
 @use "../../scss" as *;
 
 .explore__content {
-  width: 80%;
+  width: 100%;
   padding: 30px;
   .explore__header {
     @include flex(unset, space-between, unset);
