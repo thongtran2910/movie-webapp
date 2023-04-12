@@ -1,0 +1,12 @@
+@use "../../scss" as *;
+
+.auth__container {
+  @include flex(unset, space-between, unset);
+  width: 80rem;
+  margin: 30px auto;
+}
+.btn__container {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+}

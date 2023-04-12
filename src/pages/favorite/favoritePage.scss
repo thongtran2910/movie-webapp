@@ -1,0 +1,24 @@
+@use "../../scss" as *;
+
+.favorited__movie {
+  padding: 30px;
+  &-header {
+    h2 {
+      text-transform: uppercase;
+      margin-bottom: 30px;
+    }
+    .ant-typography {
+      color: $main-color;
+      font-weight: 700;
+      &:hover {
+        color: $texthover-color;
+      }
+    }
+  }
+  &-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 30px;
+    grid-row-gap: 50px;
+  }
+}

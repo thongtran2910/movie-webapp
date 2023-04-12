@@ -1,53 +1,65 @@
 @use "../../scss" as *;
 
-.movie__banner {
-  height: 100%;
-  border-radius: 10px;
+.carousel__slider {
+  margin-bottom: 3rem;
+}
 
-  .swiper-slide {
-    img {
-      height: 100%;
-      max-width: 100%;
-      border-radius: 10px;
-    }
-    .img__backdrop {
-      position: absolute;
-      top: 0;
-      left: 0;
-      content: "";
-      display: block;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        90deg,
-        rgba(0, 0, 0, 0.7979984230020133) 25%,
-        rgba(0, 0, 0, 0.5010796554950105) 45%,
-        rgba(0, 0, 0, 0.1957575266434699) 75%
-      );
-      z-index: 5;
-    }
+.carousel__slider-item {
+  padding: 9rem 0;
+  height: 80vh;
+  width: 100%;
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 20px 20px 0 0;
 
-    .banner__content {
-      position: absolute;
-      top: 50%;
-      left: 50px;
-      transform: translateY(-50%);
-      width: 40%;
-      z-index: 10;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: #000000, $alpha: 0.6);
+    border-radius: 20px 20px 0 0;
+  }
 
-      h3 {
-        font-size: 3.5rem;
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-image: linear-gradient(to top, $bg-color, rgba(0, 0, 0, 0));
+  }
+
+  &-content {
+    @include flex(center, center, unset);
+    position: relative;
+
+    &-info {
+      width: 55%;
+      padding: 0 3rem;
+      position: relative;
+
+      & > * ~ * {
+        margin-top: 2rem;
+      }
+
+      @include tablet {
+        width: 100%;
+      }
+
+      .movie__title {
+        font-size: 5rem;
+        font-weight: 700;
         line-height: 1;
-      }
 
-      p {
-        font-size: 0.9rem;
-        font-weight: 500;
-        color: $subtext-color;
-        line-height: 1.5rem;
-      }
-      .movie__release {
-        margin: 1.5rem 0;
+        @include tablet {
+          font-size: 4rem;
+        }
       }
 
       .movie__overview {
@@ -56,6 +68,11 @@
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
+      }
+
+      .movie__release,
+      .movie__overview {
+        font-weight: 700;
       }
 
       .movie__rating {
@@ -72,65 +89,21 @@
         }
       }
     }
-  }
 
-  .swiper__button {
-    position: absolute;
-    bottom: 120px;
-    z-index: 99;
-    cursor: pointer;
-    width: 30px;
+    &-poster {
+      flex: 1;
+      @include flex(center, flex-start, unset);
+      position: relative;
 
-    svg {
-      width: 1.5rem;
-      height: 1.5rem;
-    }
-    &-prev {
-      left: 31rem;
-    }
-    &-next {
-      right: 1.8rem;
+      img {
+        width: 350px;
+        border-radius: 20px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      }
+
+      @include tablet {
+        display: none;
+      }
     }
   }
-}
-
-.banner__slider {
-  position: absolute;
-  bottom: 10%;
-  right: 5%;
-  width: 50%;
-  height: 20%;
-
-  .swiper-wrapper {
-    height: 80%;
-    padding: 10px 0;
-  }
-
-  .swiper-slide {
-    cursor: pointer;
-    border-radius: 10px;
-    transition: all 0.3s;
-
-    &-thumb-active {
-      border: 3px solid $main-color;
-      transform: scale(1.1);
-    }
-  }
-
-  img {
-    border-radius: 8px;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-
-  .swiper-slide {
-    height: 100%;
-    width: 80%;
-  }
-}
-
-.swiper {
-  border-radius: 10px;
 }

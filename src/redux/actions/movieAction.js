@@ -1,4 +1,6 @@
+import { localStorageService } from "../../services/localStorageService";
 import {
+  SET_FAVORITE_MOVIE,
   SET_MOVIE_AIRING,
   SET_MOVIE_POPULAR,
   SET_MOVIE_SIMILAR,

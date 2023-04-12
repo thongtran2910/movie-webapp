@@ -11,7 +11,6 @@ const SimilarMovie = ({ category, id }) => {
   useEffect(() => {
     const fetchSimilarMovie = async () => {
       const res = await tmdbApi.getSimilar(category, id);
-      console.log(res);
       dispatch(setMovieSimilarAction(res.results));
     };
     fetchSimilarMovie();

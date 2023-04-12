@@ -101,38 +101,4 @@ const MovieGrid = ({ category }) => {
   );
 };
 
-// const MovieSearch = (props) => {
-//   const [keyword, setKeyword] = useState(props.keyword ? props.keyword : "");
-//   // const navigate = useNavigate();
-
-//   const handleSearchFunc = () => {
-//     if (keyword.trim().length > 0) {
-//     }
-//   };
-
-//   useEffect(() => {
-//     const enterEvent = (e) => {
-//       e.preventDefault();
-//       if (e.keycode === 13) {
-//         handleSearchFunc();
-//       }
-//     };
-//     document.addEventListener("keyup", enterEvent);
-//     return () => {
-//       document.removeEventListener("keyup", enterEvent);
-//     };
-//   }, [keyword, handleSearchFunc]);
-//   return (
-//     <>
-//       <SearchIcon onClick={handleSearchFunc} />
-//       <Input
-//         type="text"
-//         placeholder="Search"
-//         value={keyword}
-//         onChange={(e) => setKeyword(e.target.value)}
-//       />
-//     </>
-//   );
-// };
-
 export default MovieGrid;

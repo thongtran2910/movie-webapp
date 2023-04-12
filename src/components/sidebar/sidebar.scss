@@ -6,6 +6,43 @@
   width: 20%;
   border-right: 0.5px solid $border-color;
 
+  &-minimize {
+    padding: 50px 0 0 20px;
+    position: fixed;
+    width: 100px;
+    height: 100vh;
+    @include flex(unset, unset, column);
+
+    .logo__container {
+      height: 20%;
+    }
+
+    .sidebar__content {
+      h2,
+      p {
+        display: none;
+      }
+
+      svg {
+        height: 30px;
+        width: 80%;
+      }
+
+      .navlink__container {
+        @include flex(unset, unset, column);
+
+        .navlink__item {
+          margin-top: 30px;
+          &-active {
+            color: $main-color;
+            font-weight: 700;
+            margin-top: 30px;
+          }
+        }
+      }
+    }
+  }
+
   .sidebar__content {
     h2 {
       text-transform: uppercase;
@@ -18,16 +55,23 @@
       gap: 20px;
       margin-top: 20px;
 
-      a {
+      .navlink__item {
         @include flex(center, unset, unset);
 
-        svg {
-          height: 30px;
-          width: 30%;
+        &-active {
+          @include flex(center, unset, unset);
+          color: $main-color;
+          font-weight: 700;
+          border-right: 5px solid $main-color;
         }
-        p {
-          width: 70%;
-        }
+      }
+
+      svg {
+        height: 30px;
+        width: 30%;
+      }
+      p {
+        width: 70%;
       }
     }
 

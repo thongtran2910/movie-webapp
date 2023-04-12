@@ -4,3 +4,9 @@
   justify-content: $justify-content;
   flex-direction: $flex-direction;
 }
+
+@mixin shrinkLabel {
+  top: -30px;
+  font-size: 12px;
+  color: #e5e5e5;
+}

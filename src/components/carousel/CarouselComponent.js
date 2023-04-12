@@ -1,20 +1,16 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Thumbs, Navigation } from "swiper";
-import { useEffect, useState } from "react";
+import { Autoplay } from "swiper";
+import { useEffect } from "react";
 import { ReactComponent as StarIcon } from "../../assets/star.svg";
-import { ReactComponent as PrevBtn } from "../../assets/prev-btn.svg";
-import { ReactComponent as NextBtn } from "../../assets/next-btn.svg";
-import "swiper/scss";
-import "./carousel.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { selectMovieTrending } from "../../redux/selectors/movieSelector";
 import { setMovieTrendingAction } from "../../redux/actions/movieAction";
 import tmdbApi from "../../api/tmdbApi";
 import apiConfig from "../../api/apiConfig";
+import "swiper/scss";
+import "./carousel.scss";
 
 const Carousel = ({ category }) => {
-  const [activeThumb, setActiveThumb] = useState();
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,80 +25,61 @@ const Carousel = ({ category }) => {
   const bannerList = useSelector(selectMovieTrending);
 
   return (
-    <>
+    <div className="carousel__slider">
       <Swiper
         slidesPerView={1}
         spaceBetween={10}
         loop={true}
         grabCursor={true}
-        navigation={{
-          nextEl: ".swiper__button-next",
-          prevEl: ".swiper__button-prev",
-        }}
         autoplay={{
-          delay: 3000,
+          delay: 4000,
           disableOnInteraction: false,
         }}
-        modules={[Thumbs, Autoplay, Navigation]}
-        thumbs={{
-          swiper: activeThumb,
-        }}
-        className="movie__banner"
+        modules={[Autoplay]}
       >
         {bannerList.map((movie, index) => {
           return (
             <SwiperSlide key={index}>
-              <img
-                loading="lazy"
-                src={apiConfig.originalImage(movie.backdrop_path)}
-                alt={movie.original_title || movie.original_name}
-              />
-              <div className="swiper-lazy-preloader"></div>
-              <div className="img__backdrop"></div>
-              <div className="banner__content">
-                <h3 className="movie__title">{movie.title || movie.name}</h3>
-                <p className="movie__release">
-                  Release date: {movie.release_date || movie.first_air_date}
-                </p>
-                <p className="movie__overview">{movie.overview}</p>
-                <div className="movie__rating">
-                  <span>{movie.vote_average.toFixed(1)}</span>
-                  <StarIcon />
-                </div>
-              </div>
+              <CarouselItem item={movie} />
             </SwiperSlide>
           );
         })}
-        <PrevBtn className="swiper__button swiper__button-prev" />
-        <NextBtn className="swiper__button swiper__button-next" />
       </Swiper>
+    </div>
+  );
+};
 
-      <Swiper
-        onSwiper={setActiveThumb}
-        slidesPerView={3}
-        spaceBetween={20}
-        loop={true}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-        modules={[Thumbs, Autoplay]}
-        className="banner__slider"
-      >
-        {bannerList.map((movie, index) => {
-          return (
-            <SwiperSlide key={index}>
-              <img
-                src={apiConfig.originalImage(movie.backdrop_path)}
-                alt={movie.original_title || movie.original_name}
-                loading="lazy"
-              />
-              <div className="swiper-lazy-preloader"></div>
-            </SwiperSlide>
-          );
-        })}
-      </Swiper>
-    </>
+const CarouselItem = (props) => {
+  const item = props.item;
+  const background = apiConfig.originalImage(
+    item.backdrop_path ? item.backdrop_path : item.poster_path
+  );
+
+  return (
+    <div
+      className="carousel__slider-item"
+      style={{ backgroundImage: `url(${background})` }}
+    >
+      <div className="carousel__slider-item-content">
+        <div className="carousel__slider-item-content-info">
+          <h3 className="movie__title">{item.title || item.name}</h3>
+          <p className="movie__release">
+            Release date: {item.release_date || item.first_air_date}
+          </p>
+          <p className="movie__overview">{item.overview}</p>
+          <div className="movie__rating">
+            <span>{item.vote_average.toFixed(1)}</span>
+            <StarIcon />
+          </div>
+        </div>
+        <div className="carousel__slider-item-content-poster">
+          <img
+            src={apiConfig.w500Image(item.poster_path)}
+            alt={item.original_title || item.original_name}
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 

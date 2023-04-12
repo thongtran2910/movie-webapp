@@ -4,45 +4,89 @@ import { ReactComponent as SearchIcon } from "../../assets/search-icon.svg";
 import { ReactComponent as FavoriteIcon } from "../../assets/favorite-icon.svg";
 import { ReactComponent as BookmarkIcon } from "../../assets/bookmark-icon.svg";
 import "./sidebar.scss";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../redux/selectors/userSelector";
+import { signOutUser } from "../../firebase/firebaseConfig";
 
 const Sidebar = () => {
+  const route = window.location.pathname;
+  const sidebarClassName =
+    route === "/explore" ? "sidebar__container-minimize" : "sidebar__container";
+
+  const currentUser = useSelector(selectCurrentUser);
+  console.log(currentUser);
+
+  const handleSignOut = () => {
+    signOutUser();
+  };
+
   return (
-    <div className="sidebar__container">
+    <div className={`${sidebarClassName}`}>
       <div className="logo__container">Logo</div>
       <div className="sidebar__content">
         <h2>menu</h2>
         <div className="navlink__container">
-          <a href="/">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "navlink__item-active" : "navlink__item"
+            }
+          >
             <HomeIcon />
             <p>Home</p>
-          </a>
-          <a href="/explore">
+          </NavLink>
+          <NavLink
+            to="/explore"
+            className={({ isActive }) =>
+              isActive ? "navlink__item-active" : "navlink__item"
+            }
+          >
             <ExploreIcon />
             <p>Explore</p>
-          </a>
-          <a href="/search">
+          </NavLink>
+          <NavLink
+            to="/search"
+            className={({ isActive }) =>
+              isActive ? "navlink__item-active" : "navlink__item"
+            }
+          >
             <SearchIcon />
             <p>Search</p>
-          </a>
+          </NavLink>
         </div>
         <div className="nav__split"></div>
         <h2>personal</h2>
         <div className="navlink__container">
-          <a href="">
+          <NavLink
+            to={`/${currentUser?.uid}/favorite`}
+            className={({ isActive }) =>
+              isActive ? "navlink__item-active" : "navlink__item"
+            }
+          >
             <FavoriteIcon />
             <p>Favorite</p>
-          </a>
-          <a href="">
+          </NavLink>
+          <NavLink
+            to=""
+            className={({ isActive }) =>
+              isActive ? "navlink__item-active" : "navlink__item"
+            }
+          >
             <BookmarkIcon />
             <p>Watchlist</p>
-          </a>
+          </NavLink>
         </div>
         <div className="nav__split"></div>
         <h2>general</h2>
         <div className="navlink__container">
-          <a href="/login">
-            <p>Login</p>
-          </a>
+          {currentUser ? (
+            <p onClick={handleSignOut}>Sign out</p>
+          ) : (
+            <NavLink to="/auth" className="navlink__item">
+              <p>Login</p>
+            </NavLink>
+          )}
         </div>
       </div>
     </div>

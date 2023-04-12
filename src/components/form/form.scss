@@ -1,0 +1,10 @@
+@use "../../scss" as *;
+
+.form__container {
+  @include flex(unset, unset, column);
+  width: 430px;
+
+  h2 {
+    margin: 10px 0;
+  }
+}

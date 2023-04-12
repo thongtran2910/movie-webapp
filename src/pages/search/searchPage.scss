@@ -32,6 +32,12 @@
   .total__results {
     margin: 20px 0;
   }
+  .moviesearch__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 30px;
+    grid-row-gap: 50px;
+  }
   .movie__notfound {
     position: absolute;
     font-size: 30px;

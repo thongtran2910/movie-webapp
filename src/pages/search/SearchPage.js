@@ -31,6 +31,8 @@ const SearchPage = () => {
     setTotalResults(res.total_results);
     if (res.total_results === 0) {
       setNotfound(true);
+    } else {
+      setNotfound(false);
     }
     let search;
     if (input) {
@@ -66,10 +68,16 @@ const SearchPage = () => {
       {totalResults !== 0 ? (
         <p className="total__results">{`Search results for "${value}" (${totalResults} found)`}</p>
       ) : null}
-      <div className="movie__grid">
+      <div className="moviesearch__grid">
         {movieList.length > 0
           ? movieList.map((movie, index) => {
-              return <Card category={category.movie || category.tv} item={movie} key={index} />;
+              return (
+                <Card
+                  category={category.movie || category.tv}
+                  item={movie}
+                  key={index}
+                />
+              );
             })
           : null}
       </div>
