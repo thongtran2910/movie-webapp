@@ -2,6 +2,9 @@
 
 .carousel__slider {
   margin-bottom: 3rem;
+  a {
+    color: $text-color;
+  }
 }
 
 .carousel__slider-item {
@@ -92,7 +95,7 @@
 
     &-poster {
       flex: 1;
-      @include flex(center, flex-start, unset);
+      @include flex(center, center, unset);
       position: relative;
 
       img {

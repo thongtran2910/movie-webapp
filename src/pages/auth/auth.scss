@@ -4,6 +4,24 @@
   @include flex(unset, space-between, unset);
   width: 80rem;
   margin: 30px auto;
+
+  @include desktop {
+    width: 60rem;
+  }
+  @include tablet {
+    @include flex(unset, unset, column);
+    .form__container {
+      height: 100vh;
+    }
+    width: 35rem;
+  }
+  @include mobile {
+    @include flex(unset, unset, column);
+    .form__container {
+      height: 100vh;
+    }
+    width: 35rem;
+  }
 }
 .btn__container {
   position: absolute;

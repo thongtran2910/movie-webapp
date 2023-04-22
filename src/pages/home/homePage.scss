@@ -3,11 +3,11 @@
 .home__container {
   position: relative;
   width: 100%;
-  padding: 30px;
+  padding: 0px 30px 30px 30px;
 
   .navbar__container {
     @include flex(unset, space-between, unset);
-    padding-bottom: 20px;
+    padding: 0 0.5rem 2rem 0.5rem;
     font-size: 14px;
 
     .navbar__icon {

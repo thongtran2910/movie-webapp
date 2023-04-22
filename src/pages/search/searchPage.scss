@@ -34,9 +34,27 @@
   }
   .moviesearch__grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     grid-column-gap: 30px;
     grid-row-gap: 50px;
+    @include desktop {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-column-gap: 30px;
+      grid-row-gap: 30px;
+    }
+    @include tablet {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-column-gap: 30px;
+      grid-row-gap: 30px;
+    }
+    @include mobile {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-column-gap: 30px;
+      grid-row-gap: 30px;
+    }
   }
   .movie__notfound {
     position: absolute;
@@ -47,5 +65,8 @@
     h3 {
       text-align: center;
     }
+  }
+  button {
+    margin: 3rem auto;
   }
 }

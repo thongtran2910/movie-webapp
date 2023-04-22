@@ -5,6 +5,7 @@ import {
 } from "../../firebase/firebaseConfig";
 import { InvertedButton } from "../button/ButtonComponent";
 import FormInput from "../form-input/FormInputComponent";
+import { useNavigate } from "react-router-dom";
 
 const defaultFormFields = {
   displayName: "",
@@ -15,6 +16,7 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -35,6 +37,7 @@ const SignUpForm = () => {
       );
 
       await createUserDocumentFromAuth(user, { displayName });
+      navigate("/");
     } catch (err) {
       switch (err.code) {
         case "auth/email-already-in-use":
@@ -50,7 +53,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="form__container">
+    <div id="register" className="form__container">
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
       <form onSubmit={handleSubmit}>

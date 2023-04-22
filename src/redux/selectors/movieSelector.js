@@ -26,3 +26,7 @@ export const selectMovieSimilar = createSelector(
   [selectMovieReducer],
   (movie) => movie.movieSimilarList
 );
+export const selectMovieDetail = createSelector(
+  [selectMovieReducer],
+  (movie) => movie.movieDetail
+);

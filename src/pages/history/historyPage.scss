@@ -1,6 +1,6 @@
 @use "../../scss" as *;
 
-.favorited__movie {
+.recently__movie {
   padding: 30px;
   &-header {
     h2 {
@@ -40,7 +40,7 @@
     }
   }
 }
-.favorited__emty {
+.recently__empty {
   font-size: 2rem;
   text-align: center;
   margin: 4rem 0;

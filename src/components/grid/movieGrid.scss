@@ -7,7 +7,8 @@
   border-radius: 3rem;
   position: absolute;
   top: 30px;
-  right: 30px;
+  left: 50%;
+  transform: translateX(-50%);
   svg {
     color: $subtext-color;
     width: 100%;
@@ -21,6 +22,24 @@
   grid-template-columns: repeat(6, 1fr);
   grid-column-gap: 30px;
   grid-row-gap: 50px;
+  @include desktop {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+  }
+  @include tablet {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+  }
+  @include mobile {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+  }
 }
 .movie__notfound {
   margin: 0 auto;

@@ -3,8 +3,10 @@ import AuthPage from "../pages/auth/AuthPage";
 import DetailPage from "../pages/detail/DetailPage";
 import ExplorePage from "../pages/explore/ExplorePage";
 import FavoritePage from "../pages/favorite/FavoritePage";
+import HistoryPage from "../pages/history/HistoryPage";
 import HomePage from "../pages/home/HomePage";
 import SearchPage from "../pages/search/SearchPage";
+import WatchPage from "../pages/watch/WatchPage";
 
 export const userRoute = [
   {
@@ -29,7 +31,15 @@ export const userRoute = [
     component: <LayoutTheme Component={AuthPage} />,
   },
   {
-    path: "/:uid/favorite",
+    path: "/favorite",
     component: <LayoutTheme Component={FavoritePage} />,
+  },
+  {
+    path: "/history",
+    component: <LayoutTheme Component={HistoryPage} />,
+  },
+  {
+    path: "/:category/watch/:id",
+    component: <WatchPage />,
   },
 ];

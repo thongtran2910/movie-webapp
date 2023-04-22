@@ -1,7 +1,6 @@
-import { localStorageService } from "../../services/localStorageService";
 import {
-  SET_FAVORITE_MOVIE,
   SET_MOVIE_AIRING,
+  SET_MOVIE_DETAIL,
   SET_MOVIE_POPULAR,
   SET_MOVIE_SIMILAR,
   SET_MOVIE_TOPRATED,
@@ -48,5 +47,12 @@ export const setMovieSimilarAction = (similarMovie) => {
   return {
     type: SET_MOVIE_SIMILAR,
     payload: similarMovie,
+  };
+};
+
+export const setMovieDetailAction = (movie) => {
+  return {
+    type: SET_MOVIE_DETAIL,
+    payload: movie,
   };
 };

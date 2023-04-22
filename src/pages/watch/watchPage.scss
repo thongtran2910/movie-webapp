@@ -1,0 +1,24 @@
+@use "../../scss" as *;
+
+.watchpage__container {
+  @include flex(unset, unset, unset);
+  margin: 3rem;
+  &-btn {
+    position: fixed;
+    left: 1.5rem;
+    top: 1.5rem;
+    svg {
+      cursor: pointer;
+      color: $main-color;
+      width: 8%;
+      height: 10%;
+    }
+  }
+
+  @include tablet {
+    display: block;
+  }
+  @include mobile {
+    display: block;
+  }
+}

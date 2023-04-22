@@ -9,6 +9,7 @@ import tmdbApi from "../../api/tmdbApi";
 import apiConfig from "../../api/apiConfig";
 import "swiper/scss";
 import "./carousel.scss";
+import { Link } from "react-router-dom";
 
 const Carousel = ({ category }) => {
   const dispatch = useDispatch();
@@ -40,7 +41,9 @@ const Carousel = ({ category }) => {
         {bannerList.map((movie, index) => {
           return (
             <SwiperSlide key={index}>
-              <CarouselItem item={movie} />
+              <Link to={`/${category}/${movie.id}`}>
+                <CarouselItem item={movie} category={category} />
+              </Link>
             </SwiperSlide>
           );
         })}
@@ -49,8 +52,7 @@ const Carousel = ({ category }) => {
   );
 };
 
-const CarouselItem = (props) => {
-  const item = props.item;
+const CarouselItem = ({ item }) => {
   const background = apiConfig.originalImage(
     item.backdrop_path ? item.backdrop_path : item.poster_path
   );

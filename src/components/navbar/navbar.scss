@@ -1,9 +1,9 @@
 @use "../../scss" as *;
 
 .navbar__content {
-  @include flex(unset, unset, unset);
+  @include flex(unset, center, unset);
+  margin: 0 auto;
   color: $subtext-color;
-
   .navbar__item {
     margin-right: 20px;
     cursor: pointer;

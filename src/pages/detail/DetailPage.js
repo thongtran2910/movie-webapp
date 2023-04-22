@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import apiConfig from "../../api/apiConfig";
 import tmdbApi from "../../api/tmdbApi";
@@ -21,8 +21,8 @@ import {
 import { db } from "../../firebase/firebaseConfig";
 
 const DetailPage = () => {
-  const [movie, setMovie] = useState(null);
   const [isFavorited, setIsFavorited] = useState(false);
+  const [movie, setMovie] = useState(null);
   let { category, id } = useParams();
   const currentUser = useSelector(selectCurrentUser);
 
@@ -67,6 +67,11 @@ const DetailPage = () => {
           }),
     });
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+  console.log(movie);
   return (
     <>
       {movie && (
@@ -78,7 +83,18 @@ const DetailPage = () => {
                 movie.backdrop_path || movie.poster_path
               )})`,
             }}
-          ></div>
+          >
+            <div className="icon">
+              <div
+                className={`${
+                  isFavorited ? "icon__favorite-active" : "icon__favorite"
+                }`}
+              >
+                <HeartIcon onClick={addToFavorite} />
+                <span className="icon__favorite-tooltip">Mark as favorite</span>
+              </div>
+            </div>
+          </div>
           <div className="detail__content">
             <div className="detail__content-poster">
               <div
@@ -88,12 +104,7 @@ const DetailPage = () => {
                     movie.poster_path || movie.backdrop_path
                   )})`,
                 }}
-              >
-                <div className="watch_btn">
-                  <Button>Trailer</Button>
-                  <InvertedButton>Watch</InvertedButton>
-                </div>
-              </div>
+              ></div>
             </div>
             <div className="detail__content-info">
               <h2 className="title">{movie.title || movie.name}</h2>
@@ -114,17 +125,11 @@ const DetailPage = () => {
                 </div>
                 <CastList id={movie.id} />
               </div>
-              <div className="icon">
-                <div
-                  className={`${
-                    isFavorited ? "icon__favorite-active" : "icon__favorite"
-                  }`}
-                >
-                  <HeartIcon onClick={addToFavorite} />
-                  <span className="icon__favorite-tooltip">
-                    Mark as favorite
-                  </span>
-                </div>
+              <div className="watch_btn">
+                <Button>Trailer</Button>
+                <Link to={`/${category}/watch/${id}`}>
+                  <InvertedButton>Watch</InvertedButton>
+                </Link>
               </div>
             </div>
           </div>

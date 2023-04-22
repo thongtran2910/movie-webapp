@@ -2,13 +2,26 @@
 
 .movie__card {
   width: 100%;
-  height: 26rem;
+  height: 27rem;
   background-color: $card-color;
   border-radius: 10px;
   text-align: center;
   font-size: 0.8rem;
   transition: all 0.3s;
   z-index: 15;
+  @include desktop {
+    height: 22rem;
+    width: 100%;
+  }
+  @include tablet {
+    height: 18rem;
+    width: 100%;
+  }
+  @include mobile {
+    height: 18rem;
+    width: 100%;
+  }
+
   &:hover {
     transform: scale(1.05);
     filter: brightness(1.2);
@@ -18,6 +31,6 @@
     border-radius: 10px 10px 0 0;
   }
   h3 {
-    padding: 10px;
+    padding: 0.5rem;
   }
 }

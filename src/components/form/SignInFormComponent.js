@@ -7,9 +7,7 @@ import {
   signInWithGooglePopup,
 } from "../../firebase/firebaseConfig";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import tmdbApi from "../../api/tmdbApi";
-import { setRequestToken } from "../../redux/actions/userAction";
+import useWindowDimensions from "../../Hook/useWindowDimensions";
 
 const defaultFormFields = {
   email: "",
@@ -19,7 +17,7 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-  const dispatch = useDispatch();
+  const { width } = useWindowDimensions();
 
   const navigate = useNavigate();
 
@@ -78,6 +76,13 @@ const SignInForm = () => {
           <InvertedButton>Sign In</InvertedButton>
         </div>
       </form>
+      {width < 1024 ? (
+        <div className="text-mobile">
+          <span>
+            Don't have an Account? <a href="#register">Register Now</a>
+          </span>
+        </div>
+      ) : null}
     </div>
   );
 };

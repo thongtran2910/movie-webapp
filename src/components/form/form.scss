@@ -7,4 +7,15 @@
   h2 {
     margin: 10px 0;
   }
+  .text-mobile {
+    margin: 1rem 0;
+    a {
+      color: $main-color;
+      font-weight: bold;
+      transition: 0.3s;
+      &:hover {
+        color: $texthover-color;
+      }
+    }
+  }
 }
