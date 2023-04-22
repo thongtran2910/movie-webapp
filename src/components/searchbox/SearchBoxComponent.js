@@ -4,7 +4,7 @@ import Input from "../input/InputComponent";
 const Searchbox = (props) => {
   const enterEvent = (e) => {
     if (e.key === "Enter") {
-      //   props.onClick();
+      props.onClick();
     }
   };
 
