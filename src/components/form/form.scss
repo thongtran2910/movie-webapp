@@ -7,6 +7,26 @@
   h2 {
     margin: 10px 0;
   }
+  .google__signin {
+    margin: 1rem 0;
+    &-btn {
+      background: #fff;
+      height: 4rem;
+      width: 4rem;
+      padding: 0.8rem;
+      margin: 1rem;
+      border-radius: 50%;
+      cursor: pointer;
+
+      &:hover {
+        filter: brightness(0.8);
+      }
+      svg {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+    }
+  }
   .text-mobile {
     margin: 1rem 0;
     a {

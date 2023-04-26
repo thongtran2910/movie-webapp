@@ -24,7 +24,7 @@ const HistoryPage = () => {
 
   return (
     <>
-      {recentlyWatch?.length > 0 ? (
+      {recentlyWatch?.length !== 0 ? (
         <div className="recently__movie">
           <div className="recently__movie-header">
             <h2>Recently Watch</h2>

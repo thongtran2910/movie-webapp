@@ -5,25 +5,10 @@
   padding: 30px;
   padding-top: 0;
   .explore__header {
-    @include flex(unset, space-between, unset);
-    h2 {
-      text-transform: uppercase;
-      margin-bottom: 30px;
-      font-size: 20px;
-    }
-    .searchbox {
-      @include flex(center, unset, unset);
-      border: 1px solid $border-color;
-      padding: 10px 30px;
-      border-radius: 3rem;
-      svg {
-        color: $subtext-color;
-        width: 100%;
-        height: 25px;
-        margin-right: 20px;
-        cursor: pointer;
-      }
-    }
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    text-align: center;
   }
   .explore__container {
     margin-top: 30px;

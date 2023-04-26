@@ -8,6 +8,7 @@ import {
 } from "../../firebase/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import useWindowDimensions from "../../Hook/useWindowDimensions";
+import { ReactComponent as GoogleIcon } from "../../assets/google-icon.svg";
 
 const defaultFormFields = {
   email: "",
@@ -74,6 +75,12 @@ const SignInForm = () => {
         />
         <div className="button__container">
           <InvertedButton>Sign In</InvertedButton>
+        </div>
+        <div className="google__signin">
+          <p>Or sign in with your Google account</p>
+          <div onClick={signInWithGoogle} className="google__signin-btn">
+            <GoogleIcon />
+          </div>
         </div>
       </form>
       {width < 1024 ? (

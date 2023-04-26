@@ -1,15 +1,18 @@
 @use "../../scss" as *;
 
 .navbar__content {
-  @include flex(unset, center, unset);
-  margin: 0 auto;
+  @include flex(center, center, unset);
   color: $subtext-color;
+  margin: 0 auto;
+  @include mobile {
+    margin-top: 1rem;
+  }
   .navbar__item {
-    margin-right: 20px;
     cursor: pointer;
     position: relative;
-    font-size: 16px;
-
+    font-size: 1rem;
+    width: 5rem;
+    text-align: center;
     &::after {
       content: "";
       position: absolute;

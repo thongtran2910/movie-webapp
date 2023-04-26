@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import apiConfig from "../../api/apiConfig";
 import tmdbApi from "../../api/tmdbApi";
@@ -19,12 +19,16 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
+import { notification } from "antd";
 
 const DetailPage = () => {
   const [isFavorited, setIsFavorited] = useState(false);
   const [movie, setMovie] = useState(null);
   let { category, id } = useParams();
   const currentUser = useSelector(selectCurrentUser);
+  const navigate = useNavigate();
+
+  const [api, contextHolder] = notification.useNotification();
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -49,6 +53,13 @@ const DetailPage = () => {
 
   const addToFavorite = async () => {
     if (!movie) return;
+    if (!currentUser) {
+      api["error"]({
+        message: "Cannot add to favorite",
+        description: "Please Sign-in before using this function",
+        duration: 3,
+      });
+    }
     await updateDoc(doc(db, "users", currentUser.uid), {
       favorites: !isFavorited
         ? arrayUnion({
@@ -68,12 +79,25 @@ const DetailPage = () => {
     });
   };
 
+  const onWatchBtnClicked = () => {
+    if (!currentUser) {
+      api["error"]({
+        message: "Cannot watch",
+        description: "Please Sign-in before using this function",
+        duration: 3,
+      });
+    } else {
+      navigate(`/${category}/watch/${id}`);
+    }
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
   console.log(movie);
   return (
     <>
+      {contextHolder}
       {movie && (
         <>
           <div
@@ -127,9 +151,9 @@ const DetailPage = () => {
               </div>
               <div className="watch_btn">
                 <Button>Trailer</Button>
-                <Link to={`/${category}/watch/${id}`}>
-                  <InvertedButton>Watch</InvertedButton>
-                </Link>
+                <InvertedButton onClick={onWatchBtnClicked}>
+                  Watch
+                </InvertedButton>
               </div>
             </div>
           </div>

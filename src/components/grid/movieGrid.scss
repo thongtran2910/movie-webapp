@@ -6,15 +6,20 @@
   padding: 10px 30px;
   border-radius: 3rem;
   position: absolute;
-  top: 30px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 7rem;
+  right: 2rem;
   svg {
     color: $subtext-color;
     width: 100%;
     height: 25px;
     margin-right: 20px;
     cursor: pointer;
+  }
+  @include tablet {
+    display: none;
+  }
+  @include mobile {
+    display: none;
   }
 }
 .movie__grid {
