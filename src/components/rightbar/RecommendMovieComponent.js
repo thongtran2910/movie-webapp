@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import tmdbApi from "../../api/tmdbApi";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ReactComponent as StarIcon } from "../../assets/star.svg";
-import "./rightbar.scss";
+import "./recommendMovie.scss";
 import apiConfig from "../../api/apiConfig";
 
-const RightBar = () => {
+const RecommendMovie = ({ category, id }) => {
   const [recommendMovie, setRecommendMovie] = useState([]);
-  const { category, id } = useParams();
   useEffect(() => {
     const getRecommendMovie = async () => {
       const res = await tmdbApi.getRecommendations(category, id);
@@ -45,4 +44,4 @@ const RightBar = () => {
   );
 };
 
-export default RightBar;
+export default RecommendMovie;

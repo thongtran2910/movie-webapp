@@ -1,26 +1,14 @@
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
 import { selectCurrentUser } from "../../redux/selectors/userSelector";
-import { useParams } from "react-router-dom";
 import { ReactComponent as StarIcon } from "../../assets/star.svg";
 import { ReactComponent as CalendarIcon } from "../../assets/calendar-icon.svg";
 import "./videoPlayer.scss";
-import tmdbApi from "../../api/tmdbApi";
 
-const VideoPlayer = () => {
-  const [movie, setMovie] = useState(null);
-  const { id, category } = useParams();
+const VideoPlayer = ({ category, id, season, ep, movie }) => {
   const currentUser = useSelector(selectCurrentUser);
-
-  useEffect(() => {
-    const fetchDetails = async () => {
-      const res = await tmdbApi.getDetails(category, id, { params: {} });
-      setMovie(res);
-    };
-    fetchDetails();
-  }, [category, id]);
 
   useEffect(() => {
     if (!currentUser) return;
@@ -58,6 +46,7 @@ const VideoPlayer = () => {
       }
     });
   }, [currentUser, movie, category]);
+
   return (
     <>
       {movie && (
@@ -66,8 +55,8 @@ const VideoPlayer = () => {
             <iframe
               src={
                 category === "movie"
-                  ? `https://www.2embed.to/embed/tmdb/movie?id=${id}`
-                  : `https://www.2embed.to/embed/tmdb/tv?id=${id}`
+                  ? `https://www.2embed.cc/embed/${id}`
+                  : `https://www.2embed.cc/embedtv/${id}&s=${season}&e=${ep}`
               }
               title="Film Video Player"
               width="100%"
@@ -76,7 +65,6 @@ const VideoPlayer = () => {
               allowFullScreen
             ></iframe>
           </div>
-
           <div className="video__player-info">
             <h3>{movie?.title || movie?.name}</h3>
             <div className="video__player-info-body">

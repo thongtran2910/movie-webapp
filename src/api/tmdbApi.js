@@ -53,6 +53,14 @@ const tmdbApi = {
     const url = category[cate] + "/" + id + "/recommendations";
     return axiosClient.get(url, { params: {} });
   },
+  getVideos: (cate, id) => {
+    const url = category[cate] + "/" + id + "/videos";
+    return axiosClient.get(url, { params: {} });
+  },
+  getSeasons: (id, number) => {
+    const url = "tv/" + id + "/season/" + number;
+    return axiosClient.get(url, { params: {} });
+  },
 };
 
 export default tmdbApi;

@@ -19,16 +19,26 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
-import { notification } from "antd";
+import { notification, Modal } from "antd";
 
 const DetailPage = () => {
   const [isFavorited, setIsFavorited] = useState(false);
   const [movie, setMovie] = useState(null);
+  const [episodes, setEpisodes] = useState([]);
+  const [videos, setVideos] = useState(null);
+  const [isTrailerOpen, setIsTrailerOpen] = useState(false);
   let { category, id } = useParams();
   const currentUser = useSelector(selectCurrentUser);
   const navigate = useNavigate();
 
   const [api, contextHolder] = notification.useNotification();
+
+  const showModal = () => {
+    setIsTrailerOpen(true);
+  };
+  const handleCancel = () => {
+    setIsTrailerOpen(false);
+  };
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -37,6 +47,14 @@ const DetailPage = () => {
     };
     fetchDetails();
   }, [category, id]);
+
+  useEffect(() => {
+    const fetchSeasonDetail = async () => {
+      const res = await tmdbApi.getSeasons(id, movie?.seasons, { params: {} });
+      setEpisodes(res.episodes);
+    };
+    fetchSeasonDetail();
+  }, [id, movie]);
 
   useEffect(() => {
     if (!currentUser) {
@@ -79,6 +97,15 @@ const DetailPage = () => {
     });
   };
 
+  const onTrailerBtnClicked = () => {
+    const fetchVideos = async () => {
+      const res = await tmdbApi.getVideos(category, id, { params: {} });
+      setVideos(res.results[0].key);
+    };
+    fetchVideos();
+    showModal();
+  };
+
   const onWatchBtnClicked = () => {
     if (!currentUser) {
       api["error"]({
@@ -86,15 +113,19 @@ const DetailPage = () => {
         description: "Please Sign-in before using this function",
         duration: 3,
       });
-    } else {
+    } else if (category === "movie") {
       navigate(`/${category}/watch/${id}`);
+    } else {
+      navigate(
+        `/${category}/watch/${id}/${movie?.seasons[0].season_number}/${episodes[0].episode_number}`
+      );
     }
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
-  console.log(movie);
+
   return (
     <>
       {contextHolder}
@@ -150,7 +181,26 @@ const DetailPage = () => {
                 <CastList id={movie.id} />
               </div>
               <div className="watch_btn">
-                <Button>Trailer</Button>
+                <Button onClick={onTrailerBtnClicked}>Trailer</Button>
+                <Modal
+                  title={false}
+                  open={isTrailerOpen}
+                  closeIcon={false}
+                  onCancel={handleCancel}
+                  footer={null}
+                  width={900}
+                  closable={false}
+                  bodyStyle={{ height: 600 }}
+                  destroyOnClose={true}
+                >
+                  <iframe
+                    src={`https://www.youtube.com/embed/${videos}`}
+                    title="Film Video Player"
+                    width="100%"
+                    height="100%"
+                    allowFullScreen
+                  ></iframe>
+                </Modal>
                 <InvertedButton onClick={onWatchBtnClicked}>
                   Watch
                 </InvertedButton>

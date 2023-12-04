@@ -42,4 +42,8 @@ export const userRoute = [
     path: "/:category/watch/:id",
     component: <WatchPage />,
   },
+  {
+    path: "/:category/watch/:id/:season/:ep",
+    component: <WatchPage />,
+  },
 ];
